@@ -19,11 +19,11 @@ namespace Azure.Functions.Tracing
         public static IFunctionsHostBuilder AddFunctionTracing(this IFunctionsHostBuilder builder, Action<TracerProviderBuilder>? configureTracerProvider = null)
         {
             var tracerProvider = Sdk.CreateTracerProviderBuilder()
-                    .AddAzureFunctionsInstrumentation() //
+                    .AddAzureFunctionsInstrumentation() 
                     .AddDynatrace() //Configures to send traces to Dynatrace, automatically reading configuration from environmetn variables.
                     .With(t=>
                     {
-                        if (configureTracerProvider != null)
+                        if (configureTracerProvider != null) 
                             configureTracerProvider(t);
                     })
                     .Build();
@@ -33,9 +33,9 @@ namespace Azure.Functions.Tracing
             builder.UseAutofacServiceProviderFactory((containerBuilder) =>
             {
                 containerBuilder
-                   .RegisterAssemblyTypes(typeof(TracerProviderBuilderExtension).Assembly)
-                   .InNamespace("AutoWrap")
-                   .AsSelf() // Azure Functions core code resolves a function class by itself.
+                   .RegisterAssemblyTypes(typeof(IFunctionsHostBuilderExtension).Assembly)
+                   .InNamespace("Azure.Functions.Tracing")
+                   .AsSelf() 
                    .InstancePerTriggerRequest(); // This will scope nested dependencies to each function execution
 
                 var assemblies = AppDomain.CurrentDomain.GetAssemblies().Matches(FunctionsConfig.Read().Keys).ToList();

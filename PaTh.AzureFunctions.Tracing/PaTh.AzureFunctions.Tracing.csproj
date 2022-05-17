@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>Patrick Thurner</Authors>
-    <Version>0.9.0-beta</Version>
+    <Version>0.9.1-beta</Version>
     <Description>Distributed tracing enhancements for Azure Functions using OpenTelemetry and Dynatrace.</Description>
     <PackageProjectUrl>https://github.com/dtPaTh/Azure.Functions.Tracing</PackageProjectUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -13,7 +13,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="6.3.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection.AzureFunctions" Version="6.0.0.81" />
     <PackageReference Include="Autofac.Extras.DynamicProxy" Version="6.0.1" />
     <PackageReference Include="Dynatrace.OpenTelemetry.Instrumentation.AzureFunctions.Core" Version="1.239.2" />

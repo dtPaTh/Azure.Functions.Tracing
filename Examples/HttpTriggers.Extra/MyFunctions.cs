@@ -21,7 +21,7 @@ namespace MyNamespace
 
             using (var httpClient = new HttpClient())
             {
-                var res = await httpClient.GetAsync("http://localhost:7071/api/Test2");
+                var res = await httpClient.GetAsync("http://localhost:7071/api/Pong");
                 
                 if (!res.IsSuccessStatusCode)
                     return new OkObjectResult("Hello World, something went wrong!") as IActionResult;  

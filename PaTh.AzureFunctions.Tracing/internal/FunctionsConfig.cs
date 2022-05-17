@@ -8,8 +8,9 @@ namespace Azure.Functions.Tracing.Internal
 {
     internal class FunctionsConfig
     {
-        public static string AssemblyFromFilename(string filename)
+        public static string AssemblyFromFilename(string? filename)
         {
+            if (filename == null) throw new ArgumentNullException("AssemblyFromFilename requires a valid filename");
             return Path.GetFileNameWithoutExtension(filename);
         }
 
@@ -21,7 +22,7 @@ namespace Azure.Functions.Tracing.Internal
 
         public static string ClassFromEntrypoint(string? entrypoint)
         {
-            if (entrypoint == null) throw new ArgumentNullException("AssemblyFromEntrypoint requires a valid entrypoint string");
+            if (entrypoint == null) throw new ArgumentNullException("ClassFromEntrypoint requires a valid entrypoint string");
             return entrypoint.Substring(0, entrypoint.LastIndexOf('.'));
         }
 
@@ -40,7 +41,7 @@ namespace Azure.Functions.Tracing.Internal
                     {
                         JsonDocument root = JsonDocument.Parse(file.ReadToEnd());
 
-                        var asm = AssemblyFromEntrypoint(root.RootElement.GetProperty("entryPoint").GetString());
+                        var asm = AssemblyFromFilename(root.RootElement.GetProperty("scriptFile").GetString());
                         var cls = ClassFromEntrypoint(root.RootElement.GetProperty("entryPoint").GetString());
                         if (!func.ContainsKey(asm))
                             func.Add(asm, new List<string>(new string[] { cls }));
