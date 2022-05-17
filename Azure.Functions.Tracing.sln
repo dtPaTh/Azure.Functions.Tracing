@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32414.318
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CC5B80BE-D40B-4DFF-BDBD-EA0E6F3A7441}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		Readme.md = Readme.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{0E1D94C4-E9EF-4D30-B9E3-298C4C28B479}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpTriggers.Extra", "Examples\HttpTriggers.Extra\HttpTriggers.Extra.csproj", "{78BA7C64-AD38-4461-937A-D701A168828F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpTriggers", "Examples\HttpTriggers\HttpTriggers.csproj", "{9B173C3C-90E6-4215-BE9A-1C40454C82E9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaTh.AzureFunctions.Tracing", "PaTh.AzureFunctions.Tracing\PaTh.AzureFunctions.Tracing.csproj", "{6FDE376F-F7DC-443B-9429-BF0D1B697891}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaTh.AzureFunctions.Tracing.Extra", "PaTh.AzureFunctions.Tracing.Extra\PaTh.AzureFunctions.Tracing.Extra.csproj", "{D2BE17A1-3B57-45C6-B4BD-E4EF7D4F3101}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{78BA7C64-AD38-4461-937A-D701A168828F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78BA7C64-AD38-4461-937A-D701A168828F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78BA7C64-AD38-4461-937A-D701A168828F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78BA7C64-AD38-4461-937A-D701A168828F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B173C3C-90E6-4215-BE9A-1C40454C82E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B173C3C-90E6-4215-BE9A-1C40454C82E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B173C3C-90E6-4215-BE9A-1C40454C82E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B173C3C-90E6-4215-BE9A-1C40454C82E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FDE376F-F7DC-443B-9429-BF0D1B697891}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FDE376F-F7DC-443B-9429-BF0D1B697891}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FDE376F-F7DC-443B-9429-BF0D1B697891}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FDE376F-F7DC-443B-9429-BF0D1B697891}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2BE17A1-3B57-45C6-B4BD-E4EF7D4F3101}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2BE17A1-3B57-45C6-B4BD-E4EF7D4F3101}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2BE17A1-3B57-45C6-B4BD-E4EF7D4F3101}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2BE17A1-3B57-45C6-B4BD-E4EF7D4F3101}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{78BA7C64-AD38-4461-937A-D701A168828F} = {0E1D94C4-E9EF-4D30-B9E3-298C4C28B479}
+		{9B173C3C-90E6-4215-BE9A-1C40454C82E9} = {0E1D94C4-E9EF-4D30-B9E3-298C4C28B479}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {93C28361-3AB4-428A-8452-A0697D24927A}
+	EndGlobalSection
+EndGlobal

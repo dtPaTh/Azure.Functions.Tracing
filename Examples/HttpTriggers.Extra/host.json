@@ -1,0 +1,14 @@
+{
+    "version": "2.0",
+  "logging": {
+    "logLevel": {
+      "Dynatrace.OpenTelemetry": "Debug"
+    },
+    "applicationInsights": {
+      "samplingSettings": {
+        "isEnabled": true,
+        "excludedTypes": "Request"
+      }
+    }
+  }
+}
