@@ -32,28 +32,34 @@ It supports automatic tracing for all function triggers and distributed tracing 
 
 The repository contains 2 nuget packages: 
 
-**Azure.Functions.Tracing**
+**PaTh.AzureFunctions.Tracing**
+
+[![NuGet](http://img.shields.io/nuget/v/Path.AzureFunctions.Tracing.svg)](https://www.nuget.org/packages/Path.AzureFunctions.Tracing/)
+
 Provides a IFunctionHostBuilder extension to register all necessary components in your functions [startup class](https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection). 
 
 It's helpful if you already use a startup class or want to customize the TraceProvider configuration. 
 
 By default the TraceProvider configuration adds automatic function tracing including distributed tracing for HttpTriggers, but does not include any additional instrumentation such as outgoing http or SQLclient calls. 
 
-**Azure.Functions.Tracing.Extra**
+**PaTh.AzureFunctions.Tracing.Extra**
+
+[![NuGet](http://img.shields.io/nuget/v/Path.AzureFunctions.Tracing.Extra.svg)](https://www.nuget.org/packages/Path.AzureFunctions.Tracing.Extra/)
+
 Adds a [startup class](https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection) to your project and automatically enables distributed tracing for outgoing http and SQLClient calls by adding necessary dependencies and configuration for the instrumentation. 
 
 ### How-To use
 
 #### 1. Add necessary nuget package(s) to your project e.g. via command line. 
 
-Choose **Azure.Functions.Tracing** if you want to add a custom startup class 
+Choose **PaTh.AzureFunctions.Tracing** if you want to add a custom startup class 
 ```
-dotnet add package PaTh.AzureFunctions.Tracing.Extra
+dotnet add package PaTh.AzureFunctions.Tracing
 dotnet add package Microsoft.Azure.Functions.Extensions
 ``` 
 or 
 
-**Azure.Functions.Tracing.Extra** to get easily started.
+**PaTh.AzureFunctions.Tracing.Extra** to get easily started.
 ```
 dotnet add package PaTh.AzureFunctions.Tracing.Extra
 ``` 
@@ -61,7 +67,7 @@ dotnet add package PaTh.AzureFunctions.Tracing.Extra
 ### 1.1 Custom startup class (not necessary when using Azure.Functions.Tracing.Extra)
 If you are using a custom startup class, register necessary confguration with the extension method *AddFunctionTracing*
 
-AddFunction Tracing allows to customize configuration of the traceprovider builder such as [enabling additional instrumentation](https://github.com/open-telemetry/opentelemetry-dotnet).
+*AddFunctionTracing* allows to customize configuration of the traceprovider builder such as [enabling additional instrumentation](https://github.com/open-telemetry/opentelemetry-dotnet).
 
 ```
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
@@ -125,10 +131,10 @@ namespace MyNamespace
 }
 ```
 ### 3. Apply Dynatrace configuration
-The Dynatrace package automatically reads the the necessary configuration such as connection endpoints and authentication tokens, either from environment variables or a custom config file. To read more about configuration see [Dynatrace Help](https://www.dynatrace.com/support/help/setup-and-configuration/setup-on-cloud-platforms/microsoft-azure-services/opentelemetry-integration/opentelemetry-on-azure-functions)
+The Dynatrace package automatically reads the necessary configuration such as connection endpoints and authentication tokens, either from environment variables or a custom config file. To read more about configuration see [Dynatrace Help](https://www.dynatrace.com/support/help/setup-and-configuration/setup-on-cloud-platforms/microsoft-azure-services/opentelemetry-integration/opentelemetry-on-azure-functions)
 
 ## Examples
-In the [/Examples](/Examples/) folder you find 2 Azure Functions projects. Each containing 2 http triggered functions, where function A is calling function B.  
+In the [/Examples](/Examples/) folder you find 2 Azure Function projects. Each containing 2 http triggered functions, where function A is calling function B.  
 
 [HttpTriggers](/Examples/HttpTriggers/) is using Azure.Functions.Tracing and a custom startup class to initialize tracing and adding HttpClient instrumentation. 
 
