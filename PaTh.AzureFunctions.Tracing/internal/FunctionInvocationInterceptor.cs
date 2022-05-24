@@ -46,7 +46,7 @@ namespace Azure.Functions.Tracing.Internal
                 {
                     invocation.Proceed();
 
-                    return invocation.ReturnValue as Task;
+                    return Task.FromResult(invocation.ReturnValue);
                 }, parentContext);
             }
 
