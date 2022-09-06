@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>Patrick Thurner</Authors>
-    <Version>0.9.1-beta</Version>
+    <Version>0.10.0-beta</Version>
     <Description>Distributed tracing enhancements for Azure Functions using OpenTelemetry and Dynatrace.</Description>
     <PackageProjectUrl>https://github.com/dtPaTh/Azure.Functions.Tracing</PackageProjectUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
