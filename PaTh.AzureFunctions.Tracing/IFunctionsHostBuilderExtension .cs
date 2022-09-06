@@ -1,6 +1,8 @@
 ﻿using Autofac;
+using Autofac.Builder;
 using Autofac.Extensions.DependencyInjection.AzureFunctions;
 using Autofac.Extras.DynamicProxy;
+using Autofac.Features.Scanning;
 using Azure.Functions.Tracing.Internal;
 using Dynatrace.OpenTelemetry;
 using Dynatrace.OpenTelemetry.Instrumentation.AzureFunctions;
@@ -11,12 +13,14 @@ using OpenTelemetry.Trace;
 using System;
 using System.Linq;
 
+
+
 namespace Azure.Functions.Tracing
 {
 
     public static class IFunctionsHostBuilderExtension
     {
-        public static IFunctionsHostBuilder AddFunctionTracing(this IFunctionsHostBuilder builder, Action<TracerProviderBuilder>? configureTracerProvider = null)
+        public static IFunctionsHostBuilder AddFunctionTracing(this IFunctionsHostBuilder builder, Action<TracerProviderBuilder>? configureTracerProvider = null, Action<IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle>>? registerBuilder = null)
         {
             var tracerProvider = Sdk.CreateTracerProviderBuilder()
                     .AddAzureFunctionsInstrumentation() 
@@ -44,6 +48,11 @@ namespace Azure.Functions.Tracing
                     assembly => containerBuilder
                         .RegisterAssemblyTypes(assembly).PublicOnly()
                         .AsSelf()
+                        .With(r =>
+                        {
+                            if (registerBuilder != null)
+                                registerBuilder(r);
+                        })
                         .EnableClassInterceptors()
                         .InterceptedBy(typeof(FunctionInvocationInterceptor))
                     );
