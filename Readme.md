@@ -91,6 +91,46 @@ namespace MyNamespace
 }
 ``` 
 
+If you already use a custom startup class to inject dependencies, you need to adapt autofac's interceptor configuration:
+
+```
+using Microsoft.Azure.Functions.Extensions.DependencyInjection;
+using OpenTelemetry.Trace;
+using Azure.Functions.Tracing;
+using MyNamespace;
+using Microsoft.Extensions.DependencyInjection;
+using Autofac;
+
+[assembly: FunctionsStartup(typeof(MyFunctions.Startup))]
+
+namespace MyFunctions
+{
+    public class Startup : FunctionsStartup
+    {
+        public override void Configure(IFunctionsHostBuilder builder)
+        {
+            builder.Services.AddSingleton<IMyContainerInterface, MySampleContainer>();
+
+            //Create an intermedate seviceprovider, so to resolve the previously added dependencies later. 
+            var sp = builder.Services.BuildServiceProvider();
+
+            builder.AddFunctionTracing(t => //configure traceprovider
+            {
+                t.AddHttpClientInstrumentation();
+            }, 
+            r=> //Customize autofac interceptor configuration
+            {
+                //By default only function classes with standard constructors are considered
+                //To consider parameterized constructors, enhance config and resolving params from serviceprovider created above. 
+                r.WithParameter(new TypedParameter(typeof(IMyContainerInterface),sp.GetService<IMyContainerInterface>()));
+            });
+            
+        }
+    }
+}
+``` 
+**Note:** *This advanced configuration is demonstrated within the included example project in **Examples/HttpTrigger***
+
 ### 2. Allow your Functions to be instrumented.
    
 Constructor injection is used to make your dependencies available in a function. The use of constructor injection requires that you do not use static classes for injected services or for your function classes.
