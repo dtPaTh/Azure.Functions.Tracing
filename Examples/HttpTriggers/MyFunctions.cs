@@ -13,21 +13,31 @@ namespace MyNamespace
 
     public class MyFunctions
     {
+        IMyContainerInterface data;
+
+        
+        public MyFunctions(IMyContainerInterface _data)
+        {
+            data = _data;
+        }
+
         [FunctionName("Ping")]
         public virtual async Task<IActionResult> RunPing(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req, ILogger log, ExecutionContext ctx)
         {
             log.LogInformation("Ping triggered");
 
+            
             using (var httpClient = new HttpClient())
             {
                 var res = await httpClient.GetAsync("http://localhost:7071/api/Pong");
                 
                 if (!res.IsSuccessStatusCode)
-                    return new OkObjectResult("Hello World, something went wrong!") as IActionResult;  
+                    return new OkObjectResult(data.Get()+", something went wrong!") as IActionResult;  
             }
+            
 
-            return new OkObjectResult("Hello World") as IActionResult;
+            return new OkObjectResult(data.Get()) as IActionResult;
         }
 
 
@@ -37,7 +47,7 @@ namespace MyNamespace
         {
             log.LogInformation("Pong triggered");
 
-            return new OkObjectResult("Hello World, too") as IActionResult;
+            return new OkObjectResult(data.Get()+", too") as IActionResult;
         }
 
     }
