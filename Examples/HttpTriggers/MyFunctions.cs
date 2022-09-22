@@ -1,11 +1,9 @@
-using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System.Net.Http;
 
 namespace MyNamespace
@@ -15,7 +13,6 @@ namespace MyNamespace
     {
         IMyContainerInterface data;
 
-        
         public MyFunctions(IMyContainerInterface _data)
         {
             data = _data;
@@ -27,7 +24,6 @@ namespace MyNamespace
         {
             log.LogInformation("Ping triggered");
 
-            
             using (var httpClient = new HttpClient())
             {
                 var res = await httpClient.GetAsync("http://localhost:7071/api/Pong");
@@ -37,7 +33,7 @@ namespace MyNamespace
             }
             
 
-            return new OkObjectResult(data.Get()) as IActionResult;
+            return new OkObjectResult(data?.Get()) as IActionResult;
         }
 
 
@@ -47,7 +43,7 @@ namespace MyNamespace
         {
             log.LogInformation("Pong triggered");
 
-            return new OkObjectResult(data.Get()+", too") as IActionResult;
+            return new OkObjectResult(data?.Get()+", too") as IActionResult;
         }
 
     }

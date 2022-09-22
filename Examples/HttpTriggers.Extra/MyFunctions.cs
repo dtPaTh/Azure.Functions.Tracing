@@ -10,12 +10,11 @@ using System.Net.Http;
 
 namespace MyNamespace
 {
-
     public class MyFunctions
     {
         [FunctionName("Ping")]
         public virtual async Task<IActionResult> RunPing(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req, ILogger log, ExecutionContext ctx)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req, ILogger log)
         {
             log.LogInformation("Ping triggered");
 
