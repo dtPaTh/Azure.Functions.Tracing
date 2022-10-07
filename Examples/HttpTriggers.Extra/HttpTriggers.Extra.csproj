@@ -5,7 +5,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.0.1" />
-    <PackageReference Include="PaTh.AzureFunctions.Tracing.Extra" Version="0.9.1-beta" />
+    <PackageReference Include="PaTh.AzureFunctions.Tracing.Extra" Version="1.0.0-beta" />
   </ItemGroup>
   <ItemGroup>
     <None Update="dtconfig.json">
