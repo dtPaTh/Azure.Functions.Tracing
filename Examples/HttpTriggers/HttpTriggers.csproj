@@ -11,9 +11,7 @@
     <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.0.0-rc9.3">
       <TreatAsUsed>true</TreatAsUsed>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\PaTh.AzureFunctions.Tracing\PaTh.AzureFunctions.Tracing.csproj" />
+    <PackageReference Include="PaTh.AzureFunctions.Tracing" Version="1.0.0-beta" />
   </ItemGroup>
   <ItemGroup>
     <None Update="dtconfig.json">
