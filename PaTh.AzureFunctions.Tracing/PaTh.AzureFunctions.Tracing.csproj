@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>Patrick Thurner</Authors>
-    <Version>1.0.0-beta</Version>
+    <Version>1.1.0-beta</Version>
     <Description>Distributed tracing enhancements for Azure Functions using OpenTelemetry and Dynatrace.</Description>
     <PackageProjectUrl>https://github.com/dtPaTh/Azure.Functions.Tracing</PackageProjectUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -14,6 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Messaging.ServiceBus" Version="7.11.1" />
     <PackageReference Include="Castle.Core" Version="5.1.0" />
     <PackageReference Include="Dynatrace.OpenTelemetry.Instrumentation.AzureFunctions.Core" Version="1.249.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />

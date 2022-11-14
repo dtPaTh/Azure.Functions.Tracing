@@ -20,15 +20,22 @@ If you already use OpenTelemetry to instrument your functions you can ingest the
 To make using OpenTelemetry easier, Dynatrace provides an [enhanced library for Azure Functions](https://www.dynatrace.com/support/help/setup-and-configuration/setup-on-cloud-platforms/microsoft-azure-services/opentelemetry-integration/opentelemetry-on-azure-functions) to reduce necessary OpenTelemetry boiler-plate code for trace-propagation, automatically applying resource attributes and initialization code as well to align with semantic conventions. 
 
 ## Eliminate the entry barrier
-Wether you are new to OpenTelmetry or need to instrument thousands of functions or maybe just want to try out distributed tracing with minimal effort. The provided libary within this repository allows you to skip the need to fiddle around with OpenTelemetry or adding any additonal instrumentation code to your functions. 
+Wether you are new to OpenTelemetry or need to instrument thousands of functions or maybe just want to try out distributed tracing with minimal effort. The provided libary within this repository allows you to skip the need to fiddle around with OpenTelemetry or adding any additonal instrumentation code to your functions. 
 
 ### How-does it work?
 The approach makes use of the [aspect oriented programming (AOP)](https://en.wikipedia.org/wiki/Aspect-oriented_programming) paradigm and dependency injection to add the necessary instrumentation code. 
 
 ## Features
-The implementation is provided for .NET based Function targeting Azure Function runtime v4+. 
+The implementation is provided for .NET based functions targeting Azure Function runtime v4+. 
 
-It supports automatic tracing for all function triggers and distributed tracing for incoming/outgoing http-calls as well as outbound SQLClient calls. 
+By default the instrumentation adds automatic function tracing for any function trigger type and enables automatic distributed tracing for following triggers: 
+* **HttpTrigger**  using a *HttpRequest* binding
+* **ServiceBusTrigger** using a *ServiceBusReceivedMessage* binding
+
+You can enable .NET Framworks additional instrumentation such as [outgoing http or SQLclient calls](https://github.com/open-telemetry/opentelemetry-dotnet). 
+
+Since October 2021, .NET Azure SDK comes with experimental OpenTelemetry support which gives additional trace details. While you can capture these spans span as [described here](https://devblogs.microsoft.com/azure-sdk/introducing-experimental-opentelemetry-support-in-the-azure-sdk-for-net/), the Azure.Function.Tracing library adds selected and validated instrumentation filters via simple TraceProviderBuilder extension methods:
+* **AddServiceBusInstrumentation** adds spans for Azure.Messaging.ServiceBus Client
 
 The repository contains 2 nuget packages: 
 
@@ -88,6 +95,7 @@ namespace MyNamespace
             builder.AddFunctionTracing(t =>
             {
                 t.AddHttpClientInstrumentation(); //add httpclient instrumentation (requires OpenTelemetry.Instrumentation.Http)
+                t.AddServiceBusInstrumentation(); //enable additional isntrumentation from Azure SDK
             });
         }
     }
@@ -139,11 +147,14 @@ The Dynatrace package automatically reads the necessary configuration such as co
 ## Examples
 In the [/Examples](/Examples/) folder you find 2 Azure Function projects. Each containing 2 http triggered functions, where function *Ping* invokes function *Pong* via a http request.  
 
-![Trace](httptrigger-trace.png)
+![Trace](azure-function-tracing.png)
+
 
 [HttpTriggers.Extra](/Examples/HttpTriggers.Extra/) is using Azure.Functions.Tracing.Extra which fully automatically enables tracing via it's included startup class.
 
 [HttpTriggers](/Examples/HttpTriggers/) is using Azure.Functions.Tracing and a custom startup class to initialize tracing and adding HttpClient instrumentation. 
+
+[HttpAndQueueTriggers](/Examples/HttpAndQueueTriggers/) is an advanced example showing distributed tracing for http and servicebus triggers. 
 
 ### Running the examples
 To run the examples, you have to apply the necessary connection parameters in dtconfig.json as described in [Step #3 Apply Dynatrace configuration](#3._Apply_Dynatrace_configuration)
