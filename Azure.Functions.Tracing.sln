@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaTh.AzureFunctions.Tracing
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaTh.AzureFunctions.Tracing.Extra", "PaTh.AzureFunctions.Tracing.Extra\PaTh.AzureFunctions.Tracing.Extra.csproj", "{D2BE17A1-3B57-45C6-B4BD-E4EF7D4F3101}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpAndQueueTriggers", "Examples\HttpAndQueueTriggers\HttpAndQueueTriggers.csproj", "{BE3E1D48-6975-478E-8366-0D5209FCC169}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{D2BE17A1-3B57-45C6-B4BD-E4EF7D4F3101}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2BE17A1-3B57-45C6-B4BD-E4EF7D4F3101}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2BE17A1-3B57-45C6-B4BD-E4EF7D4F3101}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE3E1D48-6975-478E-8366-0D5209FCC169}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE3E1D48-6975-478E-8366-0D5209FCC169}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE3E1D48-6975-478E-8366-0D5209FCC169}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE3E1D48-6975-478E-8366-0D5209FCC169}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{78BA7C64-AD38-4461-937A-D701A168828F} = {0E1D94C4-E9EF-4D30-B9E3-298C4C28B479}
 		{9B173C3C-90E6-4215-BE9A-1C40454C82E9} = {0E1D94C4-E9EF-4D30-B9E3-298C4C28B479}
+		{BE3E1D48-6975-478E-8366-0D5209FCC169} = {0E1D94C4-E9EF-4D30-B9E3-298C4C28B479}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {93C28361-3AB4-428A-8452-A0697D24927A}

@@ -1,4 +1,6 @@
-﻿using Castle.DynamicProxy;
+﻿using Azure.Functions.Tracing.Internal.Propagator;
+using Azure.Messaging.ServiceBus;
+using Castle.DynamicProxy;
 using Dynatrace.OpenTelemetry;
 using Dynatrace.OpenTelemetry.Instrumentation.AzureFunctions;
 using Microsoft.AspNetCore.Http;
@@ -23,24 +25,26 @@ namespace Azure.Functions.Tracing.Internal
             DynatraceSetup.InitializeLogging(loggerFactory);
         }
 
-        public static ActivityContext ExtractParentContext(HttpRequest request)
-        {
-            var context = Propagators.DefaultTextMapPropagator.Extract(default, request, HeaderValuesGetter);
-            return context.ActivityContext;
-        }
-
-        public static IEnumerable<string>? HeaderValuesGetter(HttpRequest request, string name) =>
-           request.Headers.TryGetValue(name, out var values) ? values : (IEnumerable<string>?)null;
-
         public void Intercept(IInvocation invocation)
         {
             var attr = invocation.Method.GetCustomAttributes(typeof(FunctionNameAttribute), true);
 
             if (attr != null)
             {
+                ActivityContext parentContext = default;
+
                 //check for incoming htttprequest
                 var httpReq = invocation.Arguments.Where(a => a.GetType().IsSubclassOf(typeof(HttpRequest))).SingleOrDefault() as HttpRequest;
-                ActivityContext parentContext = httpReq != null ? ExtractParentContext(httpReq) : default;
+
+                if (httpReq != null)
+                    parentContext = HttpPropagatorHelper.ExtractParentContext(httpReq);
+                else
+                {
+                    //check for incoming ServiceBusReceivedMessage
+                    var serviceBusMsg = invocation.Arguments.Where(a => a.GetType() == typeof(ServiceBusReceivedMessage)).SingleOrDefault() as ServiceBusReceivedMessage;
+                    if (serviceBusMsg != null)
+                        parentContext = ServiceBusPropagatorHelper.ExtractParentContext(serviceBusMsg);
+                }
 
                 AzureFunctionsCoreInstrumentation.TraceAsync(tracerProvider, ((FunctionNameAttribute)attr[0]).Name, () =>
                 {

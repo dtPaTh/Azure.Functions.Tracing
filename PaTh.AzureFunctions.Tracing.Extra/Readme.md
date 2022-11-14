@@ -4,6 +4,14 @@ An Azure Function startup class leveraging PaTh.AzureFunctions.Tracing package t
 
 [Read more about tracing Azure Functions](../readme.md)
 
+Automatically enables distributed tracing for:
+* HttClient
+* SQLClient
+* Azure.Messaging.ServiceBus
+
+## ChangeLog
+* v1.1.0 - Adding support for automatic ServiceBus message tracing
+
 ## Contribute
 This is an open source project, and we gladly accept new contributions and contributors.  
 

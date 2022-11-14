@@ -1,0 +1,8 @@
+﻿{
+  "Tenant": "<your-dynatrace-tenant-id>",
+  "ClusterID": 123123,
+  "Connection": {
+    "BaseUrl": "<your-dynatrace-connection-endpoint>",
+    "AuthToken": "<your-dynatrace-authetnication-token>"
+  }
+}

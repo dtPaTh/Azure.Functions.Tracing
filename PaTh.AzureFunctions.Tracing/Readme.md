@@ -8,10 +8,18 @@ The package provides a IFunctionHostBuilder extension to register all necessary 
 
 It allows you to add tracing if you already use a startup class or want to customize the TraceProvider configuration. 
 
-By default the TraceProvider configuration adds automatic function tracing including distributed tracing for HttpTriggers, but does not enable any additional instrumentation such as [outgoing http or SQLclient calls](https://github.com/open-telemetry/opentelemetry-dotnet). 
+By default the instrumentation adds automatic function tracing for any function trigger type and enables automatic distributed tracing for following triggers: 
+* **HttpTrigger**  using a *HttpRequest* binding
+* **ServiceBusTrigger** using a *ServiceBusReceivedMessage* binding
+
+You can enable .NET Framworks additional instrumentation such as [outgoing http or SQLclient calls](https://github.com/open-telemetry/opentelemetry-dotnet). 
+
+Since October 2021, .NET Azure SDK comes with experimental OpenTelemetry support which gives additional trace details. While you can capture these spans span as [described here](https://devblogs.microsoft.com/azure-sdk/introducing-experimental-opentelemetry-support-in-the-azure-sdk-for-net/), the Azure.Function.Tracing library adds selected and validated instrumentation filters via simple TraceProviderBuilder extension methods:
+* **AddServiceBusInstrumentation** adds spans for Azure.Messaging.ServiceBus Client
 
 ## ChangeLog
-    * v1.0.0 - Removed dependency on [AutoFac](https://autofac.org/). Removed parameter *RegisterBuilder* from configuration method *AddFunctionTracing* as it is no longer necessary to pass the services when using dependency injection in Azure Functions.
+* v1.0.0 - Removed dependency on [AutoFac](https://autofac.org/). Removed parameter *RegisterBuilder* from configuration method *AddFunctionTracing* as it is no longer necessary to pass the services when using dependency injection in Azure Functions.
+* v1.1.0 - Adding support for ServiceBus message tracing
 
 ## Contribute
 This is an open source project, and we gladly accept new contributions and contributors.  

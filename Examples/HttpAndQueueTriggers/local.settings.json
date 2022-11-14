@@ -1,0 +1,9 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "SBConnection": "<Your-ServiceBus-Connectionstring>"
+    /*",PongUrl": "http://localhost:7071/api/Pong" //optional */
+  }
+}
