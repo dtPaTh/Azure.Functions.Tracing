@@ -5,6 +5,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.Net.Http;
+using System;
 
 namespace MyNamespace
 {
@@ -26,8 +27,8 @@ namespace MyNamespace
 
             using (var httpClient = new HttpClient())
             {
-                var res = await httpClient.GetAsync("http://localhost:7071/api/Pong");
-                
+                var res = await httpClient.GetAsync(Environment.GetEnvironmentVariable("PongUrl") ?? "http://localhost:7071/api/Pong");
+
                 if (!res.IsSuccessStatusCode)
                     return new OkObjectResult(data.Get()+", something went wrong!") as IActionResult;  
             }
